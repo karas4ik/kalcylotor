@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .calculator {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px 0 #000000;
+            width: 300px;
+        }
+
+        .calculator input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .calculator button {
+            width: 100%;
+            padding: 10px;
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .calculator button:hover {
+            background-color: #333333;
+        }
+
+        .calculator .result {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="number" id="num1" placeholder="Введите число 1">
+        <input type="number" id="num2" placeholder="Введите число 2">
+        <button onclick="calculate()">Рассчитать</button>
+        <button onclick="save()">Сохранить</button>
+        <button onclick="load()">Загрузить</button>
+        <button onclick="clearCalculator()">Очистить</button>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        function calculate() {
+            let num1 = parseFloat(document.getElementById('num1').value);
+            let num2 = parseFloat(document.getElementById('num2').value);
+
+            if (isNaN(num1) || isNaN(num2)) {
+                alert('Пожалуйста, введите корректные числа!');
+            } else {
+                let sum = num1 + num2;
+                let difference = num1 - num2;
+                let product = num1 * num2;
+                let quotient = num1 / num2;
+
+                document.getElementById('result').innerHTML = `Сумма: ${sum} <br> Разница: ${difference} <br> Произведение: ${product} <br> Отношение: ${quotient}`;
+            }
+        }
+
+        function save() {
+            let result = document.getElementById('result').innerHTML;
+            localStorage.setItem('calculatorResult', result);
+        }
+
+        function load() {
+            let result = localStorage.getItem('calculatorResult');
+            document.getElementById('result').innerHTML = result;
+        }
+
+        function clearCalculator() {
+            document.getElementById('num1').value = '';
+            document.getElementById('num2').value = '';
+            document.getElementById('result').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
